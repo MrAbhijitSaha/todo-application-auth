@@ -11,7 +11,7 @@ const PrivateHeader = () => {
 					<h1
 						className="text-2xl font-semibold"
 						aria-label="App Name">
-						NSF App
+						Todo App
 					</h1>
 				</Link>
 
