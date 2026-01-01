@@ -1,3 +1,4 @@
+import LoginForm from "@/components/Forms/LoginForm";
 import {
 	Card,
 	CardContent,
@@ -17,7 +18,9 @@ const page = () => {
 					</CardTitle>
 				</CardHeader>
 
-				<CardContent></CardContent>
+				<CardContent>
+					<LoginForm />
+				</CardContent>
 
 				<CardFooter>
 					Don&apos;t have an Account?

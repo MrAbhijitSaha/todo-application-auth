@@ -1,3 +1,4 @@
+import RegisterForm from "@/components/Forms/RegisterForm";
 import {
 	Card,
 	CardContent,
@@ -17,7 +18,9 @@ const page = () => {
 					</CardTitle>
 				</CardHeader>
 
-				<CardContent></CardContent>
+				<CardContent>
+					<RegisterForm />
+				</CardContent>
 
 				<CardFooter>
 					Already have an Account?
