@@ -20,14 +20,14 @@ const RegisterForm = () => {
 		mode: "all",
 	});
 
-	const RegisterFormSubmitHandeler = (value: RegisterFormType) => {
+	const registerFormSubmitHandeler = (value: RegisterFormType) => {
 		console.log(value);
 	};
 
 	return (
 		<form
-			onSubmit={handleSubmit(RegisterFormSubmitHandeler)}
-			className="space-y-4">
+			onSubmit={handleSubmit(registerFormSubmitHandeler)}
+			className="grid gap-4">
 			<Controller
 				name="name"
 				control={control}
@@ -44,6 +44,7 @@ const RegisterForm = () => {
 					</Field>
 				)}
 			/>
+
 			<Controller
 				name="email"
 				control={control}
@@ -60,6 +61,7 @@ const RegisterForm = () => {
 					</Field>
 				)}
 			/>
+
 			<Controller
 				name="password"
 				control={control}
@@ -74,6 +76,7 @@ const RegisterForm = () => {
 					</Field>
 				)}
 			/>
+
 			<Controller
 				name="confirmPassword"
 				control={control}
@@ -92,7 +95,7 @@ const RegisterForm = () => {
 
 			<Button
 				type="submit"
-				className="">
+				className="cursor-pointer">
 				Register
 			</Button>
 		</form>

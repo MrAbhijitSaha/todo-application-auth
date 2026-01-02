@@ -6,11 +6,18 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/shadcnui/card";
+import { Separator } from "@/components/shadcnui/separator";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+	title: "Register | Todo App",
+	description: "Register page of Todo Application",
+};
 
 const page = () => {
 	return (
-		<section className="grid h-[90dvh] place-items-center">
+		<section className="grid h-[96dvh] place-items-center">
 			<Card>
 				<CardHeader>
 					<CardTitle className="text-center text-2xl font-semibold">
@@ -18,9 +25,13 @@ const page = () => {
 					</CardTitle>
 				</CardHeader>
 
+				<Separator />
+
 				<CardContent>
 					<RegisterForm />
 				</CardContent>
+
+				<Separator />
 
 				<CardFooter>
 					Already have an Account?

@@ -17,7 +17,7 @@ const PasswordInputField = ({
 }: PasswordInputFieldProps) => {
 	const [inputType, setInputType] = useState("text");
 
-	const InputTypeHandeler = () => {
+	const inputTypeHandeler = () => {
 		setInputType(inputType === "password" ? "text" : "password");
 	};
 
@@ -34,7 +34,7 @@ const PasswordInputField = ({
 				className="absolute right-0"
 				variant={"ghost"}
 				type="button"
-				onClick={InputTypeHandeler}>
+				onClick={inputTypeHandeler}>
 				{inputType === "password" ? <EyeOffIcon /> : <EyeIcon />}
 			</Button>
 		</div>
