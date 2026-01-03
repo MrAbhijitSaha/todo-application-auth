@@ -1,31 +1,44 @@
 "use client";
 
+import userLogin from "@/hooks/userLogin";
 import { loginFormSchema, LoginFormType } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2Icon, SendIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { Button } from "../shadcnui/button";
 import { Checkbox } from "../shadcnui/checkbox";
 import { Field, FieldError, FieldLabel } from "../shadcnui/field";
 import { Input } from "../shadcnui/input";
 
 const LoginForm = () => {
+	const { push } = useRouter();
+
 	const {
 		control,
 		handleSubmit,
 		formState: { isSubmitting, isValid },
+		reset,
 	} = useForm({
 		resolver: zodResolver(loginFormSchema),
 		defaultValues: {
 			email: "",
 			password: "",
-			rememberMe: false,
+			rememberMe: true,
 		},
 		mode: "all",
 	});
 
-	const loginFormSubmitHandeler = (value: LoginFormType) => {
-		console.log(value);
+	const loginFormSubmitHandeler = async (value: LoginFormType) => {
+		const { isSuccess, message } = await userLogin(value);
+		if (isSuccess) {
+			toast.success(message);
+			reset();
+			push("/dashbord");
+		} else {
+			toast.error(message);
+		}
 	};
 
 	return (

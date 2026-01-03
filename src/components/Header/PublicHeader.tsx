@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
+import LoginDashbordlink from "./LoginDashbordLink";
 
 const PublicHeader = () => {
 	return (
@@ -16,8 +17,7 @@ const PublicHeader = () => {
 				</Link>
 
 				<nav className="flex items-center gap-4">
-					<Link href={"/auth"}>Login</Link>
-					<Link href={"/auth/register"}>Register</Link>
+					<LoginDashbordlink />
 
 					<ThemeToggleButton />
 				</nav>

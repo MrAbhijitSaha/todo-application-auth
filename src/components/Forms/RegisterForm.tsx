@@ -1,18 +1,24 @@
 "use client";
 
+import userRegister from "@/hooks/userRegister";
 import { registerFormSchema, RegisterFormType } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2Icon, SendIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { Button } from "../shadcnui/button";
 import { Field, FieldError, FieldLabel } from "../shadcnui/field";
 import { Input } from "../shadcnui/input";
 
 const RegisterForm = () => {
+	const { push } = useRouter();
+
 	const {
 		control,
 		handleSubmit,
 		formState: { isSubmitting, isValid },
+		reset,
 	} = useForm({
 		resolver: zodResolver(registerFormSchema),
 		defaultValues: {
@@ -24,8 +30,16 @@ const RegisterForm = () => {
 		mode: "all",
 	});
 
-	const registerFormSubmitHandeler = (value: RegisterFormType) => {
-		console.log(value);
+	const registerFormSubmitHandeler = async (value: RegisterFormType) => {
+		const { isSuccess, message } = await userRegister(value);
+
+		if (isSuccess) {
+			toast.success(message);
+			reset();
+			push("/auth");
+		} else {
+			toast.error(message);
+		}
 	};
 
 	return (
