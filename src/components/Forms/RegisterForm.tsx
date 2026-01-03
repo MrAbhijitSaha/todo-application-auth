@@ -2,14 +2,18 @@
 
 import { registerFormSchema, RegisterFormType } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2Icon, SendIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
-import PasswordInputField from "../CustomComponents/PasswordInputField";
 import { Button } from "../shadcnui/button";
-import { Field, FieldError } from "../shadcnui/field";
+import { Field, FieldError, FieldLabel } from "../shadcnui/field";
 import { Input } from "../shadcnui/input";
 
 const RegisterForm = () => {
-	const { control, handleSubmit } = useForm({
+	const {
+		control,
+		handleSubmit,
+		formState: { isSubmitting, isValid },
+	} = useForm({
 		resolver: zodResolver(registerFormSchema),
 		defaultValues: {
 			name: "",
@@ -33,6 +37,8 @@ const RegisterForm = () => {
 				control={control}
 				render={({ field, fieldState }) => (
 					<Field>
+						<FieldLabel>Full Name</FieldLabel>
+
 						<Input
 							{...field}
 							type="text"
@@ -50,6 +56,8 @@ const RegisterForm = () => {
 				control={control}
 				render={({ field, fieldState }) => (
 					<Field>
+						<FieldLabel>Email</FieldLabel>
+
 						<Input
 							{...field}
 							type="email"
@@ -67,10 +75,14 @@ const RegisterForm = () => {
 				control={control}
 				render={({ field, fieldState }) => (
 					<Field>
-						<PasswordInputField
+						<FieldLabel>Password</FieldLabel>
+
+						<Input
 							{...field}
-							ariainvalid={fieldState.invalid}
-							placeholder="Please enter a password"
+							type={"password"}
+							placeholder="Please enter your password"
+							aria-invalid={fieldState.invalid}
+							autoComplete="off"
 						/>
 						{fieldState.invalid && <FieldError errors={[fieldState.error]} />}
 					</Field>
@@ -82,10 +94,14 @@ const RegisterForm = () => {
 				control={control}
 				render={({ field, fieldState }) => (
 					<Field>
-						<PasswordInputField
+						<FieldLabel>Confirm Password</FieldLabel>
+
+						<Input
 							{...field}
+							type={"password"}
 							placeholder="Please reenter your password"
-							ariainvalid={fieldState.invalid}
+							aria-invalid={fieldState.invalid}
+							autoComplete="off"
 						/>
 
 						{fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -95,8 +111,17 @@ const RegisterForm = () => {
 
 			<Button
 				type="submit"
-				className="cursor-pointer">
-				Register
+				className="cursor-pointer"
+				disabled={!isValid || isSubmitting}>
+				{isSubmitting ? (
+					<>
+						<Loader2Icon className="animate-spin" /> Registering...
+					</>
+				) : (
+					<>
+						<SendIcon /> Register
+					</>
+				)}
 			</Button>
 		</form>
 	);

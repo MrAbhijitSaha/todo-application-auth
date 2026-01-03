@@ -2,15 +2,19 @@
 
 import { loginFormSchema, LoginFormType } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2Icon, SendIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
-import PasswordInputField from "../CustomComponents/PasswordInputField";
 import { Button } from "../shadcnui/button";
 import { Checkbox } from "../shadcnui/checkbox";
 import { Field, FieldError, FieldLabel } from "../shadcnui/field";
 import { Input } from "../shadcnui/input";
 
 const LoginForm = () => {
-	const { control, handleSubmit } = useForm({
+	const {
+		control,
+		handleSubmit,
+		formState: { isSubmitting, isValid },
+	} = useForm({
 		resolver: zodResolver(loginFormSchema),
 		defaultValues: {
 			email: "",
@@ -27,12 +31,13 @@ const LoginForm = () => {
 	return (
 		<form
 			onSubmit={handleSubmit(loginFormSubmitHandeler)}
-			className="space-y-4">
+			className="grid gap-4">
 			<Controller
 				name="email"
 				control={control}
 				render={({ field, fieldState }) => (
 					<Field aria-invalid={fieldState.invalid}>
+						<FieldLabel>Email</FieldLabel>
 						<Input
 							{...field}
 							type="email"
@@ -49,10 +54,14 @@ const LoginForm = () => {
 				control={control}
 				render={({ field, fieldState }) => (
 					<Field aria-invalid={fieldState.invalid}>
-						<PasswordInputField
+						<FieldLabel>Password</FieldLabel>
+
+						<Input
 							{...field}
-							ariainvalid={fieldState.invalid}
+							type={"password"}
 							placeholder="Please enter your password"
+							aria-invalid={fieldState.invalid}
+							autoComplete="off"
 						/>
 						{fieldState.invalid && <FieldError errors={[fieldState.error]} />}
 					</Field>
@@ -77,8 +86,17 @@ const LoginForm = () => {
 
 			<Button
 				type="submit"
-				className="">
-				Login
+				className={`${!isValid || isSubmitting ? "cursor-not-allowed" : "cursor-pointer"}`}
+				disabled={!isValid || isSubmitting}>
+				{isSubmitting ? (
+					<>
+						<Loader2Icon className="animate-spin" /> Login...
+					</>
+				) : (
+					<>
+						<SendIcon /> Login
+					</>
+				)}
 			</Button>
 		</form>
 	);
