@@ -21,6 +21,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
+  todos         Todo[]
 
   @@unique([email])
   @@map("user")
@@ -72,4 +73,14 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Todo {
+  id          String   @id @default(uuid())
+  task        String
+  isCompleted Boolean  @default(false)
+  isStared    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  createdBy   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
 }

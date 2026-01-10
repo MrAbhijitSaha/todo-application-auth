@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const page = () => {
 	return (
-		<section className="relative">
+		<section className="">
 			<CreateNewTaskButton />
 
 			<section className="space-y-2">

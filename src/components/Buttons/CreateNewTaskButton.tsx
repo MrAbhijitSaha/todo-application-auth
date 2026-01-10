@@ -3,7 +3,6 @@ import CreateTaskForm from "../Forms/CreateTaskForm";
 import { Button } from "../shadcnui/button";
 import {
 	Dialog,
-	DialogClose,
 	DialogContent,
 	DialogDescription,
 	DialogHeader,
@@ -14,12 +13,12 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../shadcnui/tooltip";
 
 const CreateNewTaskButton = () => {
 	return (
-		<div className="absolute bottom-0 right-0">
+		<div className="fixed right-14 bottom-14">
 			<Dialog>
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<DialogTrigger asChild>
-							<Button className="bg-amber-700 hover:bg-amber-800">
+							<Button className="cursor-pointer">
 								<PlusIcon
 									size={32}
 									className="stroke-3"
@@ -43,9 +42,9 @@ const CreateNewTaskButton = () => {
 
 					<CreateTaskForm />
 
-					<DialogClose asChild>
+					{/* <DialogClose asChild>
 						<Button variant="outline">Cancel</Button>
-					</DialogClose>
+					</DialogClose> */}
 				</DialogContent>
 			</Dialog>
 		</div>
