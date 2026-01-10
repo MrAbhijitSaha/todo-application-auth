@@ -21,3 +21,9 @@ export const registerFormSchema = z
 	});
 
 export type RegisterFormType = z.infer<typeof registerFormSchema>;
+
+export const taskDataSchema = z.object({
+	task: z.string().min(2, "Enter a Valid Task Name"),
+});
+
+export type TaskDataType = z.infer<typeof taskDataSchema>;
