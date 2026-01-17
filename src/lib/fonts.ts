@@ -1,19 +1,21 @@
-import { Lora, Plus_Jakarta_Sans, Roboto_Mono } from "next/font/google";
+import { Abhaya_Libre, Antic, JetBrains_Mono } from "next/font/google";
 
-export const plusJakartaSans = Plus_Jakarta_Sans({
+export const antic = Antic({
 	subsets: ["latin"],
 	display: "swap",
-	variable: "--plus-jakarta-sans",
+	variable: "--antic",
+	weight: "400",
 });
 
-export const lora = Lora({
+export const abhayaLibre = Abhaya_Libre({
 	subsets: ["latin"],
 	display: "swap",
-	variable: "--lora",
+	weight:"400",
+	variable: "--abhaya-libre",
 });
 
-export const robotoMono = Roboto_Mono({
+export const jetBrainsMono = JetBrains_Mono({
 	subsets: ["latin"],
 	display: "swap",
-	variable: "--roboto-mono",
+	variable: "--jetbrains-mono",
 });

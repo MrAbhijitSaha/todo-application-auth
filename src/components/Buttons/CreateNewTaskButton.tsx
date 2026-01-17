@@ -1,3 +1,7 @@
+"use client";
+
+import { dialogAtom } from "@/lib/atom";
+import { useAtom } from "jotai";
 import { PlusIcon } from "lucide-react";
 import CreateTaskForm from "../Forms/CreateTaskForm";
 import { Button } from "../shadcnui/button";
@@ -12,9 +16,13 @@ import {
 import { Tooltip, TooltipContent, TooltipTrigger } from "../shadcnui/tooltip";
 
 const CreateNewTaskButton = () => {
+	const [isOpen, setIsOpen] = useAtom(dialogAtom);
+
 	return (
 		<div className="fixed right-14 bottom-14">
-			<Dialog>
+			<Dialog
+				onOpenChange={(open) => setIsOpen(open)}
+				open={isOpen}>
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<DialogTrigger asChild>

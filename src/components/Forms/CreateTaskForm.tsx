@@ -1,22 +1,26 @@
 "use client";
 
+import { dialogAtom } from "@/lib/atom";
 import { taskDataSchema, TaskDataType } from "@/lib/zodSchema";
-
+import createTask from "@/server/createTask";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSetAtom } from "jotai";
+import { Loader2Icon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { Button } from "../shadcnui/button";
 import { DialogClose } from "../shadcnui/dialog";
 import { Field, FieldError, FieldLabel } from "../shadcnui/field";
 import { Input } from "../shadcnui/input";
 
 const CreateTaskForm = () => {
+	const setIsOpen = useSetAtom(dialogAtom);
+
 	const {
 		handleSubmit,
 		control,
 		reset,
 		formState: { isSubmitting },
-		setValue,
-		clearErrors,
 	} = useForm({
 		resolver: zodResolver(taskDataSchema),
 		defaultValues: {
@@ -25,8 +29,16 @@ const CreateTaskForm = () => {
 		mode: "all",
 	});
 
-	const formHandelar = (value: TaskDataType) => {
-		console.log(value);
+	const formHandelar = async ({ task }: TaskDataType) => {
+		const { isSuccess, message } = await createTask(task);
+
+		if (isSuccess) {
+			toast.success(message);
+			reset();
+			setIsOpen(false);
+		} else {
+			toast.error(message);
+		}
 	};
 
 	return (
@@ -54,7 +66,18 @@ const CreateTaskForm = () => {
 				)}
 			/>
 
-			<Button type="submit">Create</Button>
+			<Button
+				className="cursor-pointer"
+				type="submit"
+				disabled={isSubmitting}>
+				{isSubmitting ? (
+					<>
+						<Loader2Icon className="animate-spin" />
+					</>
+				) : (
+					<>Submit</>
+				)}
+			</Button>
 
 			<DialogClose asChild>
 				<Button

@@ -1,5 +1,5 @@
 import ThemeProvider from "@/components/Providers/ThemeProvider";
-import { lora, plusJakartaSans, robotoMono } from "@/lib/fonts";
+import { abhayaLibre, antic, jetBrainsMono } from "@/lib/fonts";
 import { ReactNode } from "react";
 import "./globals.css";
 
@@ -10,7 +10,7 @@ type RootLayoutProps = {
 const RootLayout = ({ children }: Readonly<RootLayoutProps>) => {
 	return (
 		<html
-			className={`${plusJakartaSans.variable} ${lora.variable} ${robotoMono.variable}`}
+			className={`${antic.variable} ${abhayaLibre.variable} ${jetBrainsMono.variable}`}
 			lang="en"
 			suppressHydrationWarning>
 			<body>
