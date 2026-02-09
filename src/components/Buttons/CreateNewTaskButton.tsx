@@ -1,6 +1,6 @@
 "use client";
 
-import { dialogAtom } from "@/lib/atom";
+import { createTaskDialogAtom } from "@/lib/atom";
 import { useAtom } from "jotai";
 import { PlusIcon } from "lucide-react";
 import CreateTaskForm from "../Forms/CreateTaskForm";
@@ -16,7 +16,7 @@ import {
 import { Tooltip, TooltipContent, TooltipTrigger } from "../shadcnui/tooltip";
 
 const CreateNewTaskButton = () => {
-	const [isOpen, setIsOpen] = useAtom(dialogAtom);
+	const [isOpen, setIsOpen] = useAtom(createTaskDialogAtom);
 
 	return (
 		<div className="fixed right-14 bottom-14">

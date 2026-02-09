@@ -1,21 +1,91 @@
-import { Field, FieldDescription, FieldLabel } from "../shadcnui/field";
+import { taskDataSchema } from "@/lib/zodSchema";
+import editTask from "@/server/editTask";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderCircleIcon } from "lucide-react";
+import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { Todo } from "../../../generated/prisma/client";
+import { Button } from "../shadcnui/button";
+import { DialogClose } from "../shadcnui/dialog";
+import { Field, FieldError, FieldLabel } from "../shadcnui/field";
 import { Input } from "../shadcnui/input";
 
-const TaskEditForm = () => {
+type TaskEditFormProps = {
+	task: Todo;
+};
+
+const TaskEditForm = ({ task }: TaskEditFormProps) => {
+	const {
+		handleSubmit,
+		control,
+		reset,
+		formState: { isSubmitting },
+	} = useForm({
+		resolver: zodResolver(taskDataSchema),
+		defaultValues: {
+			task: task.task,
+		},
+		mode: "all",
+	});
+
+	const formHandelar = async (task: string) => {
+		const { isSuccess, message } = await editTask(task);
+
+		if (isSuccess) {
+			toast.success(message);
+			reset();
+			// setIsOpen(false);
+		} else {
+			toast.error(message);
+		}
+	};
+
 	return (
-		<>
-			<Field>
-				<FieldLabel htmlFor="name">Full name</FieldLabel>
-				<Input
-					id="name"
-					autoComplete="off"
-					placeholder="Evil Rabbit"
-				/>
-				<FieldDescription>
-					This appears on invoices and emails.
-				</FieldDescription>
-			</Field>
-		</>
+		<form
+			onSubmit={handleSubmit(formHandelar)}
+			className="grid grid-cols-2 gap-4"
+			noValidate>
+			<Controller
+				name="task"
+				control={control}
+				render={({ field, fieldState }) => (
+					<Field
+						data-invalid={fieldState.invalid}
+						className="col-span-2">
+						<FieldLabel htmlFor={field.name}>Enter Your Task Name</FieldLabel>
+						<Input
+							{...field}
+							id={field.name}
+							aria-invalid={fieldState.invalid}
+							placeholder="Enter Your Task Name"
+							autoComplete="off"
+						/>
+						{fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+					</Field>
+				)}
+			/>
+
+			<Button
+				className="cursor-pointer"
+				type="submit"
+				disabled={isSubmitting}>
+				{isSubmitting ? (
+					<>
+						<LoaderCircleIcon className="animate-spin" />
+					</>
+				) : (
+					<>Edit</>
+				)}
+			</Button>
+
+			<DialogClose asChild>
+				<Button
+					variant="outline"
+					className="cursor-pointer">
+					Cancel
+				</Button>
+			</DialogClose>
+		</form>
 	);
 };
 

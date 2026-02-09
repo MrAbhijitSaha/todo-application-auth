@@ -1,9 +1,9 @@
 import { formatDistanceToNow } from "date-fns";
-import { PenIcon, Trash2Icon } from "lucide-react";
 import { Todo } from "../../../generated/prisma/client";
 import CheckboxButton from "../Buttons/CheckboxButton";
+import DeleteTaskButton from "../Buttons/DeleteTaskButton";
+import EditTaskButton from "../Buttons/EditTaskButton";
 import StarButton from "../Buttons/StarButton";
-import { Button } from "../shadcnui/button";
 import { Card, CardContent } from "../shadcnui/card";
 
 type DisplayTaskCardProps = {
@@ -37,13 +37,9 @@ const DisplayTaskCard = ({ data }: DisplayTaskCardProps) => {
 						todoStar={data.isStared}
 					/>
 
-					<Button variant={"outline"}>
-						<PenIcon size={24} />
-					</Button>
+					<EditTaskButton task={data} />
 
-					<Button variant={"outline"}>
-						<Trash2Icon size={24} />
-					</Button>
+					<DeleteTaskButton id={data.id} />
 				</div>
 			</CardContent>
 		</Card>

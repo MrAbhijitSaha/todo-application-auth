@@ -5,7 +5,7 @@ import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 const PrivateHeader = () => {
 	return (
 		<header
-			className=" border-b shadow"
+			className="border-b shadow"
 			aria-label="app-header">
 			<div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
 				<Link href={"/dashbord"}>
@@ -17,7 +17,9 @@ const PrivateHeader = () => {
 				</Link>
 
 				<nav className="flex items-center gap-4">
-					<Link href={"/"}>Home</Link>
+					<Link href={"/dashbord"}>All task</Link>
+					<Link href={"/complete"}>Completed</Link>
+					<Link href={"/star"}>Star</Link>
 
 					<LogoutButton />
 

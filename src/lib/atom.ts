@@ -1,3 +1,5 @@
 import { atom } from "jotai";
 
-export const dialogAtom = atom(false);
+export const createTaskDialogAtom = atom(false);
+
+export const editTaskDialogAtom = atom(false);

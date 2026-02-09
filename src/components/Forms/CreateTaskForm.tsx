@@ -1,6 +1,6 @@
 "use client";
 
-import { dialogAtom } from "@/lib/atom";
+import { createTaskDialogAtom } from "@/lib/atom";
 import { taskDataSchema, TaskDataType } from "@/lib/zodSchema";
 import createTask from "@/server/createTask";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,7 +14,7 @@ import { Field, FieldError, FieldLabel } from "../shadcnui/field";
 import { Input } from "../shadcnui/input";
 
 const CreateTaskForm = () => {
-	const setIsOpen = useSetAtom(dialogAtom);
+	const setIsOpen = useSetAtom(createTaskDialogAtom);
 
 	const {
 		handleSubmit,

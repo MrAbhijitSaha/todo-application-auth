@@ -28,7 +28,8 @@ const StarButton = ({ todoId, todoStar }: StarButtonProps) => {
 			type="button"
 			variant={"outline"}
 			onClick={handleStarButton}
-			disabled={isLoading}>
+			disabled={isLoading}
+			className="cursor-pointer">
 			<StarIcon
 				size={24}
 				className={`${todoStar && "fill-amber-500 text-amber-500"}`}
