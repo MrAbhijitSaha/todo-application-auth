@@ -1,4 +1,4 @@
-import { taskDataSchema } from "@/lib/zodSchema";
+import { taskDataSchema, TaskDataType } from "@/lib/zodSchema";
 import editTask from "@/server/editTask";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircleIcon } from "lucide-react";
@@ -23,13 +23,13 @@ const TaskEditForm = ({ task }: TaskEditFormProps) => {
 	} = useForm({
 		resolver: zodResolver(taskDataSchema),
 		defaultValues: {
-			task: task.task,
+			t: task.task,
 		},
 		mode: "all",
 	});
 
-	const formHandelar = async (task: string) => {
-		const { isSuccess, message } = await editTask(task);
+	const formHandelar = async ({ t }: TaskDataType) => {
+		const { isSuccess, message } = await editTask(t, task.id);
 
 		if (isSuccess) {
 			toast.success(message);
@@ -46,7 +46,7 @@ const TaskEditForm = ({ task }: TaskEditFormProps) => {
 			className="grid grid-cols-2 gap-4"
 			noValidate>
 			<Controller
-				name="task"
+				name="t"
 				control={control}
 				render={({ field, fieldState }) => (
 					<Field

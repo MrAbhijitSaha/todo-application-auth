@@ -2,9 +2,8 @@
 
 import prisma from "@/lib/database/dbClient";
 import { revalidatePath } from "next/cache";
-import { Todo } from "../../generated/prisma/client";
 
-const editTask = async ({ task, id }: Todo) => {
+const editTask = async (task: string, id: string) => {
 	try {
 		await prisma.todo.update({
 			where: {
