@@ -1,5 +1,5 @@
-import Header from "@/components/Header/Header";
 import ThemeProvider from "@/components/Providers/ThemeProvider";
+import { abhayaLibre, antic, jetBrainsMono } from "@/lib/fonts";
 import { ReactNode } from "react";
 import "./globals.css";
 
@@ -10,6 +10,7 @@ type RootLayoutProps = {
 const RootLayout = ({ children }: Readonly<RootLayoutProps>) => {
 	return (
 		<html
+			className={`${antic.variable} ${abhayaLibre.variable} ${jetBrainsMono.variable}`}
 			lang="en"
 			suppressHydrationWarning>
 			<body>
@@ -17,9 +18,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => {
 					attribute={"class"}
 					defaultTheme="dark"
 					enableSystem={false}>
-					<Header />
-
-					<main className="mx-auto max-w-7xl px-6 py-3">{children}</main>
+					{children}
 				</ThemeProvider>
 			</body>
 		</html>
