@@ -1,10 +1,26 @@
 import CreateNewTaskButton from "@/components/Buttons/CreateNewTaskButton";
 import DisplayTaskCard from "@/components/Card/DisplayTaskCard";
+import { auth } from "@/lib/auth";
 import prisma from "@/lib/database/dbClient";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 const page = async () => {
+	const session = await auth.api.getSession({
+		headers: await headers(),
+	});
+
+	if (session === null) {
+		return redirect("/auth");
+	}
+
+	const {
+		user: { id },
+	} = session;
+
 	const userTasks = await prisma.todo.findMany({
 		where: {
+			userId: id,
 			isCompleted: true,
 		},
 	});

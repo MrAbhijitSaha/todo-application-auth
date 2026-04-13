@@ -24,13 +24,13 @@ const DisplayTaskCard = ({ data }: DisplayTaskCardProps) => {
 						todoStatus={data.isCompleted}
 					/>
 
-					<h3 className={`text-2xl ${data.isCompleted && "line-through"}`}>
+					<p className={`text-2xl ${data.isCompleted && "line-through"}`}>
 						{data.task}
-					</h3>
+					</p>
 				</div>
 
-				<div className="grid grid-cols-3 gap-2">
-					<p className="text-foreground/60 col-span-3">{timeStamp} ago</p>
+				<div className="flex items-center justify-between">
+					<p className="text-foreground/60">{timeStamp} ago</p>
 
 					<StarButton
 						todoId={data.id}

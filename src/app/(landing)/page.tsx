@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-	title: "Next.js Starter Fullstack",
-	description: "Production grade Fullstack Next.js starter template",
+	title: "Home | Todo App",
+	description: "Welcome to the Todo Application",
 };
 
 const page = () => {
@@ -22,7 +22,7 @@ const page = () => {
 					<Link
 						href={"/auth/register"}
 						className="text-foreground text-xl">
-						Get Start
+						Get Started
 					</Link>
 				</Button>
 			</div>

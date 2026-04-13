@@ -24,13 +24,13 @@ const CreateTaskForm = () => {
 	} = useForm({
 		resolver: zodResolver(taskDataSchema),
 		defaultValues: {
-			task: "",
+			t: "",
 		},
 		mode: "all",
 	});
 
-	const formHandelar = async ({ task }: TaskDataType) => {
-		const { isSuccess, message } = await createTask(task);
+	const formHandelar = async ({ t }: TaskDataType) => {
+		const { isSuccess, message } = await createTask(t);
 
 		if (isSuccess) {
 			toast.success(message);
@@ -47,7 +47,7 @@ const CreateTaskForm = () => {
 			className="grid grid-cols-2 gap-4"
 			noValidate>
 			<Controller
-				name="task"
+				name="t"
 				control={control}
 				render={({ field, fieldState }) => (
 					<Field

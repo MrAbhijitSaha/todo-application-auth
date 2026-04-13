@@ -21,7 +21,7 @@ const editTask = async (task: string, id: string) => {
 			message: "Task Edited Successfuly",
 		};
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 
 		return {
 			isSuccess: false,
